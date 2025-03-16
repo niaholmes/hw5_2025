@@ -1,0 +1,219 @@
+/* STEP 1: Animate the logo using keyframes */
+
+@keyframes fade_in_and_grow { 
+    /* starting at 0 opacity and width of 25px */
+    from {
+        opacity: 0;
+        width: 25px;
+    }
+    /* ending at 1 opacity and width of 475px */
+    to {
+        opacity: 1;
+        width: 475px;
+    }
+}
+
+/* this part applies the animation to the logo */
+#logo {
+    animation: fade_in_and_grow 5s ease-out forwards
+    
+    /* learned (from W3Schools) that 'ease out' is for a fast start, and 'forwards' is for keeping the final state when the animation ends, and I think this is what makes the animation happens only when the page is loaded (not sure) */
+}
+
+/* STEP 2: Edit the body element */
+
+body {
+    /* adding the google font 'Poppins' with serif as backup */
+    font-family: "Poppins", serif;
+
+    /* adding background image from 'images' folder */
+    background-image: url(../images/concrete_seamless.png);
+
+    /* adding background color #f1f1f1 */
+    background-color: #f1f1f1;
+}
+
+/* STEP 3: The header tag to use flex */
+
+header {
+    /* header usses flex */
+    display: flex;
+
+    /* flex steps needed to match the example */
+    flex-direction: column;
+    align-items: center;
+}
+
+/* STEP 4: The nav_links class to use flex to match our example */
+
+.nav_links {
+    /* nav links use flex */
+    display: flex;
+
+    /*flex step needed to match the example */
+    flex-direction: column;
+}
+
+/* STEP 5: Keeping link color the same after visiting */
+
+.nav_links a:visited {
+    /* keeps the color the same */
+    color: blue;
+}
+
+/* STEP 6: Style ONLY those header elements that are direct children of a card class */
+
+/* gets ONLY the headers that are children of card class */
+.card > header {
+    /* changes bg color */
+    background: #288088;
+
+    /* creates solid 2px border & adds color*/
+    border: solid 2px #45ADAD;
+
+    /* 20 px padding on only top & bottom */
+    padding: 20px 0 20px 0;
+
+    /* 50px border radius only on top left & right corners */
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+/* This section makes sure the corners curve as they should */
+.card {
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+/* STEP 7 & 8 : The card class matches the example, specify an initial “size” of 450px &  the css for the pricing class matches the example. */
+
+.card {
+    display: flex;
+    /* sets the initial size to 450px (as learned on W3 Schools */
+    flex-basis: 450px;
+    flex-direction: column;
+}
+
+.pricing {
+    display: flex;
+    flex-direction: column;
+    /* I tried my best to adjust the padding to whatever made it look like the example, I do not believe it is exact, however. */
+    padding: 85px;
+}
+
+/* STEP 9: Style the images in the gallery class */
+
+/* Gets images from gallery class */
+.gallery > img {
+    /* adds the wanted border, margin, & width */
+    border: solid 10px #50c7c7;
+    margin: 10px;
+    width: 300px
+}
+
+/* STEP 10: The gallery class to use flex to match the example */
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+/* When screen size is greater than 900px (media query) */
+
+/* STEP 11: The header tag, and the nav_links class match the example using flex-properties, NOT position properties. */
+
+@media screen and (min-width: 900px) {
+    header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .nav_links {
+        display: flex;
+        flex-direction: row;
+    }
+
+    /* STEP 12: The pricing and card classes match the example */
+
+    .pricing {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .card {
+        display: flex;
+        flex-basis: 275px;
+    }
+
+    /* STEP 13: Modify the first header (the one not inside main) so that it remains visible at the top of the screen even as we scroll down. Make sure that it is always visible. */
+
+    /* For this step, I tried many different ways, but was unable to style only the first header. I applied these styles below to the header section in step 11, but the header would go behind the cards instead of on top. */
+
+    body > header:first-of-type {
+        position: sticky;
+        top: 0;
+        /* z-index: 1000; */
+    }
+}
+
+/* Reduced motion section */
+
+/* STEP 14: Prefers-reduced-motion. */
+
+@media (prefers-reduced-motion: reduce) {
+    #logo {
+      animation: none;
+    }
+  }
+
+/* Print View Section */
+
+/* STEP 15: Change the font on your body to Arial with a backup value of  Helvetica */
+
+@media print {
+    body {
+        font-family: Arial, Helvetica;
+    }
+
+/* STEP 16: The background image should be removed. */
+    body {
+        background-image: none;
+    }
+
+/* STEP 17: Edit the nav/nav_links elements so that they are spaced according to the image above. */
+    .nav_links {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+/* STEP 18: Edit the pricing class so that the elements align along the bottom.  As long as it aligns along the bottom we don't care if the cards aren't the same height. */
+    .pricing {
+        flex-direction: row;
+        align-items: center;
+        padding: 0 0 50px 0;
+    }
+
+/* STEP 19: The card elements should have a solid border 2px of #45ADDD and use flex-basis of 325px. */
+    .card {
+        flex-basis: 325px;
+        border: solid 2px #45ADDD;
+    }
+
+/* STEP 20: No part of the gallery should be visible. */
+    .gallery {
+        display: none;
+    }
+
+    #gallery {
+        display: none;
+    }
+
+/* STEP 21: Without using list-style-type add the thumbs up entity as shown in the cards. */
+    .pricing .card ul li:nth-child(2)::after {
+        content: " 👍";
+        font-size: 1.2em;
+    }
+}
